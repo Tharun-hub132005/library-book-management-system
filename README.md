@@ -44,11 +44,12 @@ In return_book, (return_date - due_date).days calculates the number of days diff
 ## Formatting Dates:
 strftime("%Y-%m-%d") is used to convert datetime objects into clean, standardized strings for saving in the JSON file. strptime() is used to convert them back from strings to datetime objects.
 
-## 3 Conditionals (if, elif, else):
+# 3 Conditionals (if, elif, else):
 
-## Flow Control: The menu() function heavily relies on if/elif/else to decide which function to call based on the user's input (e.g., if the user enters "1", call add_book).
+## Flow Control: 
+The menu() function heavily relies on if/elif/else to decide which function to call based on the user's input (e.g., if the user enters "1", call add_book).
 
-## 3 Validation:
+## Validation:
 
 ## if book_id in data["books"]::
 Checks if a book already exists (when adding) or if it exists (when removing or issuing).
@@ -65,7 +66,7 @@ Determines if a fine needs to be applied.
 ## User Feedback:
 Conditionals are used to provide appropriate messages to the user (e.g., "Book added successfully" vs. "Book already exists").
 
-## 4 How to Run the Program:
+# 4 How to Run the Program:
 ## Save:
 Copy the entire code above and paste it into a file named library_system.py (or any other .py extension).
 

@@ -1,0 +1,117 @@
+import json
+import os
+from datetime import datetime, timedelta
+
+DATA_FILE = "library_data.json"
+FINE_PER_DAY = 5  # Rs. 5 per day fine
+
+# Load or initialize data
+def load_data():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    else:
+        return {"books": {}, "students": {}}
+
+def save_data(data):
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+# Add a new book
+def add_book(data):
+    book_id = input("Enter Book ID: ")
+    title = input("Enter Book Title: ")
+    if book_id in data["books"]:
+        print("Book already exists.")
+    else:
+        data["books"][book_id] = {"title": title, "available": True}
+        print(f"Book '{title}' added successfully.")
+
+# Remove a book
+def remove_book(data):
+    book_id = input("Enter Book ID to remove: ")
+    if book_id in data["books"]:
+        del data["books"][book_id]
+        print("Book removed.")
+    else:
+        print("Book not found.")
+
+# Issue a book
+def issue_book(data):
+    student_id = input("Enter Student ID: ")
+    book_id = input("Enter Book ID to issue: ")
+    if book_id in data["books"] and data["books"][book_id]["available"]:
+        due_date = (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
+        data["students"][student_id] = {
+            "book_id": book_id,
+            "issue_date": datetime.now().strftime("%Y-%m-%d"),
+            "due_date": due_date
+        }
+        data["books"][book_id]["available"] = False
+        print(f"Book issued to student. Due Date: {due_date}")
+    else:
+        print("Book is either unavailable or does not exist.")
+
+# Return a book
+def return_book(data):
+    student_id = input("Enter Student ID: ")
+    if student_id in data["students"]:
+        record = data["students"][student_id]
+        due_date = datetime.strptime(record["due_date"], "%Y-%m-%d")
+        return_date = datetime.now()
+        delta_days = (return_date - due_date).days
+        fine = FINE_PER_DAY * max(0, delta_days)
+
+        book_id = record["book_id"]
+        data["books"][book_id]["available"] = True
+        del data["students"][student_id]
+
+        print("Book returned.")
+        if fine > 0:
+            print(f"Late by {delta_days} day(s). Fine: Rs. {fine}")
+        else:
+            print("Returned on time. No fine.")
+    else:
+        print("No record found for this student.")
+
+# Display books
+def display_books(data):
+    print("\nAvailable Books:")
+    for book_id, details in data["books"].items():
+        status = "Available" if details["available"] else "Issued"
+        print(f"{book_id}: {details['title']} - {status}")
+
+# Menu
+def menu():
+    data = load_data()
+
+    while True:
+        print("\n--- Library Book Management ---")
+        print("1. Add Book")
+        print("2. Remove Book")
+        print("3. Issue Book")
+        print("4. Return Book")
+        print("5. View Books")
+        print("6. Exit")
+        choice = input("Choose an option (1-6): ")
+
+        if choice == "1":
+            add_book(data)
+        elif choice == "2":
+            remove_book(data)
+        elif choice == "3":
+            issue_book(data)
+        elif choice == "4":
+            return_book(data)
+        elif choice == "5":
+            display_books(data)
+        elif choice == "6":
+            save_data(data)
+            print("Exiting system. Goodbye!")
+            break
+        else:
+            print("Invalid choice.")
+
+# Run the program
+if __name__ == "__main__":
+    menu()

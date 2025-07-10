@@ -1,9 +1,9 @@
 ## Project: Simple Library Book Management System
 This program allows you to:
 
-*1 Add new books to the library.
+* 1 Add new books to the library.
 
-*2 Remove existing books.
+* 2 Remove existing books.
 
 *3 Issue books to students (sets a due date).
 

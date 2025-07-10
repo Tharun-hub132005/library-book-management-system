@@ -12,22 +12,22 @@ This program allows you to:
 * View all books and their availability.
 
 * Saves data to a file so it persists between runs.
-# How this program demonstrates the concepts:
+### How this program demonstrates the concepts:
 # 1 Dictionaries:
 
-# data["books"] and data["students"]:
+## data["books"] and data["students"]:
 These are the primary data structures. They store information using unique keys (like book_id or student_id) to quickly look up or modify details.
 
-# Adding/Removing:
+## Adding/Removing:
 When you add_book, a new entry is created in data["books"]. When you remove_book, an entry is deleted.
 
-# Accessing data:
+## Accessing data:
 data["books"][book_id]["title"] shows how you can chain dictionary lookups to get specific pieces of information.
 
-# Iteration:
+## Iteration:
 The display_books function uses data["books"].items() to loop through all books, showing how to process all entries in a dictionary.
 
-## 2 Date Modules (datetime, timedelta):
+# 2 Date Modules (datetime, timedelta):
 
 # Importing:
 from datetime import datetime, timedelta brings in the necessary tools.

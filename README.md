@@ -29,50 +29,50 @@ The display_books function uses data["books"].items() to loop through all books,
 
 # 2 Date Modules (datetime, timedelta):
 
-# Importing:
+## Importing:
 from datetime import datetime, timedelta brings in the necessary tools.
 
-# Current Date/Time: 
+## Current Date/Time: 
 datetime.now() is used to get the exact moment a book is issued or returned.
 
-# Calculating Future Dates:
+## Calculating Future Dates:
 timedelta(days=7) is added to datetime.now() to automatically set a due date one week in the future.
 
-# Date Comparison and Subtraction:
+## Date Comparison and Subtraction:
 In return_book, (return_date - due_date).days calculates the number of days difference, crucial for determining if a book is late.
 
-# Formatting Dates:
+## Formatting Dates:
 strftime("%Y-%m-%d") is used to convert datetime objects into clean, standardized strings for saving in the JSON file. strptime() is used to convert them back from strings to datetime objects.
 
 ## 3 Conditionals (if, elif, else):
 
-# Flow Control: The menu() function heavily relies on if/elif/else to decide which function to call based on the user's input (e.g., if the user enters "1", call add_book).
+## Flow Control: The menu() function heavily relies on if/elif/else to decide which function to call based on the user's input (e.g., if the user enters "1", call add_book).
 
-# * Validation:
+## 3 Validation:
 
-# if book_id in data["books"]::
+## if book_id in data["books"]::
 Checks if a book already exists (when adding) or if it exists (when removing or issuing).
 
-# if data["books"][book_id]["available"]:: 
+## if data["books"][book_id]["available"]:: 
 Checks if a book can be issued.
 
-# if student_id in data["students"]::
+## if student_id in data["students"]::
 Checks if a student has an active borrowing record.
 
-# if delta_days > 0:: 
+## if delta_days > 0:: 
 Determines if a fine needs to be applied.
 
-# User Feedback:
+## User Feedback:
 Conditionals are used to provide appropriate messages to the user (e.g., "Book added successfully" vs. "Book already exists").
 
-## * How to Run the Program:
-# Save:
+## 4 How to Run the Program:
+## Save:
 Copy the entire code above and paste it into a file named library_system.py (or any other .py extension).
 
-# Open Terminal/Command Prompt:
+## Open Terminal/Command Prompt:
 Navigate to the directory where you saved the file.
 
-# Run: 
+## Run: 
 Execute the program using the command:
 
  * Bash
